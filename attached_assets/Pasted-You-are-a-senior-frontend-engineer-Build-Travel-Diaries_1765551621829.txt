@@ -1,0 +1,91 @@
+You are a senior frontend engineer. Build Travel Diaries pages (listing + detail) for a Tours & Taxi website using:
+
+Next.js (App Router)
+
+Tailwind CSS
+
+Framer Motion
+
+Cloudinary images (placeholders below)
+
+Mobile-first design
+
+SEO-friendly, accessible markup
+
+Create:
+
+app/diaries/page.tsx — Travel Diaries listing (interactive, filter by tag, author, month)
+
+app/diaries/[slug]/page.tsx — Diary detail (long-form narrative with full-screen hero, gallery, map, inline images, read-time)
+
+Sample Cloudinary placeholders
+
+https://res.cloudinary.com/demo/image/upload/v1/diary_mountain.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/diary_temple.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/diary_river.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/diary_trek.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/diary_paragliding.jpg
+
+Listing page requirements
+
+Sections:
+
+Header & breadcrumbs
+
+Hero banner: short intro to Travel Diaries, small CTA to “Write with us” or “Submit your diary” (link to contact/admin)
+
+Filter bar: tags (spiritual, trek, honeymoon, family), months, author filter, search keywords
+
+Featured diary: top story prominently displayed (large card)
+
+Diaries grid/list: cards with thumbnail, title, excerpt, read time, tags, “Read More” button
+
+Infinite scroll / Load more with Framer Motion reveal for new items
+
+Sidebar (desktop): popular diaries, newsletter signup, small map showing regions covered
+
+Footer CTA: submit your diary or subscribe
+
+UX:
+
+Cards animate on scroll (fadeUp + slight lift) using variants.
+
+Clicking a diary navigates to diary detail page with nice transition.
+
+Diary detail page requirements
+
+Sections:
+
+Hero full-bleed image with title, subtitle, author, publish date, read time, tag badges — animated fade-in.
+
+Content body — long-form rich text: paragraphs, blockquotes, highlighted tips, bullet lists, small inlined images (Cloudinary) with captions and alt text.
+
+Image gallery — lightbox-enabled (modal) with swipe support for mobile (use a simple lightbox implementation).
+
+Map & route — small interactive map or embedded static map showing trip points.
+
+Author card — photo, short bio, social links.
+
+Related diaries / Read next — 3 cards at bottom, horizontal scroll with animation.
+
+Comment CTA — optional: link to contact form or open WhatsApp discussion.
+
+Structured data — JSON-LD for BlogPosting with author, datePublished, images.
+
+Social share bar — persistent left or bottom for desktop/mobile with links (Twitter, Facebook, WhatsApp).
+
+Output requirements:
+
+Provide data/diaries.ts with 6 sample diary entries (slug, title, excerpt, body as HTML or markdown string, images, author, tags, date).
+
+Provide components: DiaryCard, DiaryFilter, DiaryHero, DiaryBody, DiaryGallery, AuthorCard, and RelatedDiaries.
+
+Provide sample lib/markdown.ts or use react-markdown to render body content.
+
+Provide lib/animations.ts variants used across components.
+
+Provide SEO meta tags & JSON-LD in detail page.

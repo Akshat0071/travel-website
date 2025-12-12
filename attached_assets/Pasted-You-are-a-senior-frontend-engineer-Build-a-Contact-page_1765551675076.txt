@@ -1,0 +1,71 @@
+You are a senior frontend engineer. Build a Contact page for a Tours & Taxi website using:
+
+Next.js (App Router)
+
+Tailwind CSS
+
+Framer Motion
+
+Cloudinary for any small images/icons
+
+Accessible & SEO-friendly markup
+
+Create app/contact/page.tsx and components under /components/contact/*.
+
+Contact page requirements (sections)
+
+Hero / Intro — short trust-building headline, phone & WhatsApp quick CTA
+
+Contact Cards — address (Chintpurni, Himachal), phone with click-to-call, WhatsApp button, support email, office hours
+
+Contact Form (primary):
+
+Fields: name, phone, email, subject, message, service type (select: package/taxi/enquiry), optional file upload (upload travel doc or itinerary request PDF)
+
+Client-side validation (zod or simple) and inline error display
+
+Spam protection: invisible reCAPTCHA (mention in README how to enable) or simple honeypot field
+
+On submit:
+
+POST to /api/contact (serverless endpoint) which saves to Supabase (or stubbed JSON file) and returns success
+
+Send email notification to admin via SendGrid (or log to console in demo)
+
+Optionally return a ticket/reference number
+
+Show success toast + “Chat Now on WhatsApp” button
+
+Office Location Map — embedded Google Maps iframe or static image for demo
+
+FAQ mini-section — 5 short FAQs about bookings & taxi service
+
+Support Response Times & SLA — short box: “We respond within 12 hours”
+
+Footer CTA — newsletter subscribe or quick booking
+
+UX & Animations
+
+Animate input focus with subtle outline and shadow.
+
+Form submit: show animated loader then success check animation.
+
+Use aria-live="polite" for submission status messages.
+
+On mobile, sticky contact CTA bar at bottom with phone & WhatsApp.
+
+Technical details
+
+lib/contact.ts helper for client-side form submission & validation.
+
+/api/contact serverless route stub that validates and stores incoming data in a demo JSON or posts to Supabase (comment both options).
+
+File upload: small files forwarded to Cloudinary via signed server API; if using demo mode, accept file but do not upload.
+
+Output requirements
+
+Provide app/contact/page.tsx, components/contact/ContactForm.tsx, components/contact/ContactCard.tsx, lib/contact.ts, and pages/api/contact.js (or app/api/contact/route.ts) stub.
+
+Provide README snippet showing how to wire SendGrid / Supabase for production (env vars).
+
+Ensure form accessible labels and appropriate input types.

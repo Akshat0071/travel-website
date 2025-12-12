@@ -1,0 +1,79 @@
+You are a senior frontend engineer. Build Blog pages for the site with a distinct content/SEO focus (shorter, informational posts vs. Travel Diaries). Use these technologies:
+
+Next.js (App Router)
+
+Tailwind CSS
+
+Framer Motion
+
+Cloudinary images (placeholders below)
+
+react-markdown for markdown blog rendering
+
+Accessible & SEO-minded markup
+
+Create:
+
+app/blog/page.tsx — Blog listing (search, categories, featured posts)
+
+app/blog/[slug]/page.tsx — Blog post detail (SEO-first)
+
+Sample Cloudinary placeholders
+
+https://res.cloudinary.com/demo/image/upload/v1/blog_travel1.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/blog_seo1.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/blog_itinerary.jpg
+
+Listing Page Requirements
+
+Sections:
+
+Hero: “Travel Guides & Tips” with short lead paragraph about regular travel advice
+
+Filter & Categories: SEO categories (Local Guides, How-to, Safety, Budget Travel, Food)
+
+Featured posts carousel — top 3 posts with large visuals (Framer Motion)
+
+Blog post list — cards with thumbnail, title, excerpt, read time, author, tag list
+
+Sidebar: popular posts, newsletter subscription, tag cloud
+
+Pagination or “Load More” with animated reveal
+
+Post Detail Requirements
+
+Sections:
+
+Hero with featured image and meta (title, author, publish date, read time)
+
+Content body — rendered from markdown: headings, code blocks (if any), images with captions
+
+Table of Contents — sticky on desktop (auto-generated from headings in post)
+
+Inline CTA blocks — e.g., “Book this package” cards inserted at logical places (optional)
+
+Related posts — bottom section with cards
+
+Comments — lightweight CTA to contact or use third-party like Disqus (optional)
+
+SEO:
+
+<title> and <meta description> from post frontmatter
+
+Open Graph tags with og:image (Cloudinary)
+
+JSON-LD Article schema with headline, author, datePublished, image
+
+Share buttons: include WhatsApp share with prefilled message to share the post link
+
+Output requirements:
+
+Provide data/blogs.ts with 6 sample markdown posts (frontmatter-like fields: slug, title, excerpt, tags, author, date, image, markdownContent).
+
+Provide components: BlogCard, BlogHero, BlogTOC, MarkdownRenderer (react-markdown config), BlogSidebar.
+
+Use rehype plugins for external links target="_blank" rel="noopener noreferrer".
+
+Ensure images use Next <Image /> or Cloudinary URLs and lazy-loading.
