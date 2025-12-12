@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Menu, X, Phone, Mail, Facebook, Instagram, Twitter } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,18 +19,27 @@ export default function Header() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Packages", href: "#destinations" },
-    { name: "Taxi Service", href: "#taxi" },
-    { name: "Travel Diaries", href: "#diaries" },
-    { name: "Blog", href: "#blog" },
-    { name: "Contact", href: "#contact" },
+    { name: "Packages", href: "/packages" },
+    { name: "Taxi Service", href: "/taxi" },
+    { name: "Travel Diaries", href: "/#diaries" }, // Anchors on home page need /# if on other pages
+    { name: "Blog", href: "/#blog" },
+    { name: "Contact", href: "/#contact" },
   ];
+
+  const isHome = location === "/";
+
+  // Helper to determine if link is active
+  const isActive = (href: string) => {
+    if (href === "/" && location === "/") return true;
+    if (href !== "/" && location.startsWith(href)) return true;
+    return false;
+  };
 
   return (
     <>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
+          isScrolled || !isHome
             ? "bg-white/90 backdrop-blur-md shadow-md py-3"
             : "bg-transparent py-5"
         }`}
@@ -40,23 +50,23 @@ export default function Header() {
         <div className="container mx-auto px-4 flex items-center justify-between">
           <Link href="/">
             <a className="text-2xl font-serif font-bold text-primary flex items-center gap-2">
-              <span className={`text-3xl ${isScrolled ? "text-primary" : "text-white"}`}>Himachal</span>
-              <span className={`text-accent ${isScrolled ? "" : "text-yellow-400"}`}>Travels</span>
+              <span className={`text-3xl ${isScrolled || !isHome ? "text-primary" : "text-white"}`}>Himachal</span>
+              <span className={`text-accent ${isScrolled || !isHome ? "" : "text-yellow-400"}`}>Travels</span>
             </a>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`font-medium hover:text-accent transition-colors ${
-                  isScrolled ? "text-foreground" : "text-white/90"
-                }`}
-              >
-                {link.name}
-              </a>
+              <Link key={link.name} href={link.href}>
+                <a
+                  className={`font-medium hover:text-accent transition-colors ${
+                    isActive(link.href) ? "text-accent" : (isScrolled || !isHome ? "text-foreground" : "text-white/90")
+                  }`}
+                >
+                  {link.name}
+                </a>
+              </Link>
             ))}
             <Button
               className="bg-accent hover:bg-accent/90 text-white font-semibold rounded-full px-6"
@@ -71,7 +81,7 @@ export default function Header() {
             className="md:hidden text-2xl"
             onClick={() => setIsMobileMenuOpen(true)}
           >
-            <Menu className={isScrolled ? "text-foreground" : "text-white"} />
+            <Menu className={isScrolled || !isHome ? "text-foreground" : "text-white"} />
           </button>
         </div>
       </motion.header>
@@ -102,14 +112,16 @@ export default function Header() {
               </div>
               <nav className="flex flex-col gap-6">
                 {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-lg font-medium text-foreground hover:text-primary transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </a>
+                  <Link key={link.name} href={link.href}>
+                    <a
+                      className={`text-lg font-medium transition-colors ${
+                        isActive(link.href) ? "text-accent" : "text-foreground hover:text-primary"
+                      }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </a>
+                  </Link>
                 ))}
                 <Button
                   className="w-full bg-accent hover:bg-accent/90 text-white mt-4"

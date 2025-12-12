@@ -1,0 +1,139 @@
+You are a senior frontend engineer. Build production-grade Packages pages for a Tours & Taxi website using:
+
+Next.js 14 (App Router)
+
+Tailwind CSS
+
+Framer Motion
+
+Cloudinary images (use placeholder URLs provided below)
+
+Mobile-first responsive design
+
+Accessible & SEO-friendly markup
+
+Produce two routes:
+
+/packages — Packages listing (grid, filters, search, sort)
+
+/packages/[slug] — Package detail
+
+Place all components under /components/packages/*. Provide full, working React/Next.js code (no pseudocode). Ensure pages work with static sample data (array or JSON) so they render out-of-the-box.
+
+Data & sample Cloudinary images (use these placeholders)
+
+Use these placeholder Cloudinary URLs in the sample data for each package image (replaceable later):
+
+https://res.cloudinary.com/demo/image/upload/v1/hero_mountain1.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/temple1.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/river1.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/trek1.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/paragliding1.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/valley1.jpg
+
+/packages — Listing Page Requirements
+Sections & features
+
+Header & breadcrumbs (consistent with Home header)
+
+Hero / Page Banner — title “Traveler Packages”, short description, small filter/search bar
+
+Filter & Search Bar (sticky on top when scrolling)
+
+Filters: Region (Himachal, Shimla, Manali, Dharamshala), Duration (1-3, 4-6, 7+ days), Price range, Theme (Adventure, Spiritual, Honeymoon)
+
+Sort: Popular, Price low→high, Duration
+
+Search input: keyword search (title/region)
+
+Packages Grid (responsive)
+
+Each PackageCard includes:
+
+Image (Cloudinary) — lazy loaded, alt text
+
+Badge (e.g., “Popular”, “New”)
+
+Title & short excerpt
+
+Duration & starting price
+
+Star rating + small reviews count
+
+CTA: “View Details” and “Book Now” (Book → small modal or direct WhatsApp)
+
+Animations: Framer Motion stagger fade/scale on scroll
+
+Pagination / Load more — infinite scroll or “Load more” button
+
+Map & Quick View (Optional) — toggle to show map pins for packages (leaflet or static image)
+
+Newsletter CTA — subscription box to capture leads
+
+Footer
+
+UX details
+
+Clicking a PackageCard navigates to /packages/[slug] (replace slug in sample data).
+
+Book Now opens a modal to collect optional name/phone then POST to /api/leads (client-side stub) and then redirects to WhatsApp link with prefilled message.
+
+Filters work in UI with client-side state (no backend required for demo).
+
+/packages/[slug] — Package Detail Page Requirements
+Sections & features
+
+Hero Banner — large banner image gallery slider (Framer Motion + swipe)
+
+Gallery thumbnails below hero
+
+Download itinerary PDF button (Cloudinary PDF placeholder)
+
+Package Summary Panel — title, region, duration, price, immediate CTA: “Book Now” (WhatsApp + lead save)
+
+Day-by-Day Itinerary — accordion or timeline with timeline markers (expand/collapse)
+
+Highlights & Inclusions / Exclusions — two-column layout
+
+Map / Route — embedded map or static image with route points
+
+Add-ons & Optional Extras — checkboxes with price increments
+
+Reviews & Ratings — user reviews list + aggregated rating
+
+Related / Suggested Packages — horizontal carousel with similar packages
+
+FAQ — collapsible Q&A section
+
+Sticky booking bar for mobile — price + Book Now button visible on scroll
+
+Footer
+
+UX & technical
+
+Use semantic sections and aria attributes for accordions.
+
+Use Framer Motion for gallery transitions, itinerary reveal, and related packages carousel.
+
+Provide JSON-LD structured data for TouristTrip or Product representing the package with price, duration, itinerary summary, and images.
+
+Provide SEO tags (title, meta description) derived from package data.
+
+Output Requirements
+
+Provide app/packages/page.tsx and app/packages/[slug]/page.tsx (or equivalent).
+
+Provide components: PackageCard, PackageFilter, PackageHeroSlider, ItineraryAccordion, RelatedPackagesCarousel.
+
+Provide a small data/packages.ts file with 6 sample packages using the placeholder images and PDF placeholder https://res.cloudinary.com/demo/raw/upload/v1/sample_itinerary.pdf.
+
+Provide Framer Motion animation variants file lib/animations.ts.
+
+Provide minimal CSS/Tailwind config changes if needed (list them).
+
+Ensure pages render with sample data with no backend dependencies.

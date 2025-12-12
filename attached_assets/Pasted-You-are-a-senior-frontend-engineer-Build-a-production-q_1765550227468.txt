@@ -1,0 +1,135 @@
+You are a senior frontend engineer. Build a production-quality Taxi Service page for a Tours & Taxi website using:
+
+Next.js 14 (App Router)
+
+Tailwind CSS
+
+Framer Motion
+
+Cloudinary images (placeholder URLs provided)
+
+Mobile-first responsive design
+
+Accessible & SEO-friendly markup
+
+Create app/taxi/page.tsx and supporting components in /components/taxi/*. Use sample data and placeholder images so the page runs standalone.
+
+Sample Cloudinary images for taxi page
+
+https://res.cloudinary.com/demo/image/upload/v1/taxi1.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/taxi2.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/tempo_traveller.jpg
+
+https://res.cloudinary.com/demo/image/upload/v1/cab_interior.jpg
+
+Taxi Page Requirements — Sections & Behavior
+1. Header & Breadcrumbs
+
+Same header as site. Breadcrumb: Home / Taxi Service
+
+2. Hero / Service Snapshot
+
+Short headline: “Reliable Taxi & Transfer Services — Himachal, Chandigarh & Airports”
+
+Quick contact CTA: “Call / WhatsApp” + small stat badges (Years of service, Drivers, Trips completed)
+
+3. Vehicle Types Grid
+
+Cards for vehicle categories:
+
+Sedan (2–4 pax)
+
+SUV (4–6 pax)
+
+Tempo Traveller (10–14 pax)
+
+Luxury (Optional)
+
+Each card: image, capacity, luggage info, per-km example rate, CTA “Select”
+
+4. Route Templates & Example Fares
+
+Predefined common routes (Chandigarh → Shimla, Chandigarh → Manali, Delhi Airport → Shimla)
+
+Show distance, approximate time, example fare (starting price)
+
+Button: “Book this route” (prefills WhatsApp with route details)
+
+5. Booking Form (Interactive)
+
+Form fields:
+
+Service type (one-way / round-trip)
+
+Vehicle type (select)
+
+Pickup location (autocomplete text)
+
+Drop location (autocomplete text)
+
+Date & Time picker
+
+Number of passengers
+
+Contact name & phone
+
+Optional message
+
+UX: When user fills required fields and clicks Book Now:
+
+Save lead to /api/leads (client-side stub or call)
+
+Redirect to WhatsApp with pre-filled message including all details
+
+Show confirmation toast or small inline success state
+
+Mobile UX: sticky booking CTA on bottom.
+
+6. Safety & Features Section
+
+Driver verification, sanitized vehicles, GPS tracking (if available), cancellation policy
+
+Small icon cards with motion
+
+7. Testimonials / Recent Rides
+
+Carousel of rider quotes specifically for taxi service
+
+8. FAQ Section
+
+Common questions: Cancellation, Payment options, Night charges, Extra km charges
+
+9. Footer & Contact Details
+UX & Animations
+
+Use Framer Motion for: card hover, form reveal, slide-in sections, and CTA micro-interactions.
+
+Use accessible labels on form elements and inline validation messages.
+
+Use aria-live for booking confirmation.
+
+Technical Requirements
+
+Use Next.js <Image> with Cloudinary loader or raw Cloudinary URLs.
+
+Provide client-side validation (zod or basic) for the booking form.
+
+Provide sample data model in data/taxis.ts for vehicles & routes.
+
+Provide a helper that composes the WhatsApp prefill link and encodes the message.
+
+Output Requirements
+
+Provide app/taxi/page.tsx
+
+Components: VehicleCard, RouteCard, TaxiBookingForm, SafetyFeatures, TaxiTestimonials
+
+data/taxis.ts with sample vehicle types & route templates.
+
+lib/whatsapp.ts helper to generate wa.me link with encoded message.
+
+lib/animations.ts or reuse the same animations file as packages.
+
+Ensure page runs with sample data and no backend.
