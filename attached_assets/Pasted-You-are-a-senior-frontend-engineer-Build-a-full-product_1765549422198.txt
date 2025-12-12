@@ -1,0 +1,168 @@
+You are a senior frontend engineer.
+Build a full production-quality Home Page for a Tours, Travel Packages & Taxi Services website using:
+
+Next.js 14 (App Router preferred)
+Tailwind CSS
+Framer Motion
+Cloudinary-hosted images (use placeholder URLs)
+Mobile-first responsive design
+High-end Himachal travel aesthetic (mountains, temples, rivers, adventure)
+
+Layout must look visually premium with improved colors, fonts, spacing, and modern UI patterns:
+
+Use Playfair Display for headings, Inter for body text
+Color palette: Himalayan blue, forest green, saffron accents, warm neutrals
+Smooth rounded sections, soft shadows, improved spacing, more appealing layout structure
+
+Create a complete app/page.tsx (or /src/app/page.tsx) plus all reusable components in /components/home/...
+
+The home page must use semantic HTML, clean layout, perfect spacing, animations, SEO-friendly structure.
+
+SECTION ORDER (Follow exactly)
+
+Header (Sticky)
+
+Hero Section
+
+Popular Destinations Section
+
+Taxi Service Section
+
+Travel Themes Section
+
+Why Choose Us Section
+
+Testimonials Section (UPDATED REQUIREMENTS)
+
+Travel Diaries / Blogs Section
+
+CTA Banner Section (VTA Banner)
+
+Footer
+
+HERO SECTION — UPDATED REQUIREMENTS
+
+The hero section must contain a high-impact Infinite Scrolling Image Carousel with:
+
+At least 5 Cloudinary images:
+
+Mountains
+Mata temples (Chintpurni, Jwala Ji, Naina Devi, etc.)
+Rivers / waterfalls
+Trekking
+Paragliding
+
+Animation requirements:
+
+Infinite sliding carousel
+Framer Motion–powered
+Images slide to the next image → pause for 1.5 seconds → slide again
+Duplicate track for seamless loop
+Dark gradient overlay across images
+
+Overlay content:
+
+Large premium heading (Playfair Display)
+Subheading
+CTA buttons (“Explore Packages”, “Taxi Booking”)
+
+TESTIMONIALS SECTION — UPDATED REQUIREMENTS
+
+Replace horizontal scroll with:
+
+A 5-item testimonial carousel
+No scrollbar
+Includes Framer Motion sliding animation
+Each slide shows 1 testimonial at a time
+Carousel auto-slides → waits 1.5 seconds → slides again
+Include Left and Right arrow buttons for manual control
+Testimonial card:
+User photo
+Name
+City
+Review
+Star rating
+Soft shadows & premium aesthetic
+Smooth fade/slide transitions
+
+ALL OTHER SECTIONS (UNCHANGED BUT VISUALLY IMPROVED)
+1. Header (Sticky)
+
+Logo
+Navigation links: Home, Packages, Taxi Service, Travel Diaries, Blog, Contact
+CTA button: “Book Now” → WhatsApp link placeholder
+On scroll → background blur + shadow
+Mobile drawer menu with Framer Motion
+
+2. Popular Destinations Section
+
+Grid layout
+Animated destination cards using Framer Motion
+Hover scale, gradient overlay
+Each card includes image, destination name, duration, price, CTA
+
+3. Taxi Service Section
+
+Split layout (image left, text right)
+Included routes: Chandigarh, Delhi, Airport pickups
+CTA: WhatsApp booking
+Smooth slide-in animations
+
+5. Travel Themes Section
+
+Themes: Spiritual Tours, Honeymoon, Adventure, Family Trips
+Background images with overlay titles
+Hover animations, fade/slide-in on scroll
+
+6. Why Choose Us Section
+
+Feature cards (4–6 cards):
+Local Himachal Expertise
+Affordable Packages
+Safe Taxi Service
+WhatsApp-based Instant Booking
+Custom Itineraries
+Verified Drivers
+Icons + motion effects
+
+8. Travel Diaries / Blogs Section
+
+Show latest 3 posts
+Image, title, excerpt, Read More link
+Framer Motion fade-up
+
+9. CTA Banner (VTA Banner)
+
+Large scenic background image
+Gradient overlay
+Heading: “Plan Your Himachal Trip Today”
+CTA: “Chat on WhatsApp”
+Framer Motion zoom/fade
+
+10. Footer
+
+Company information
+Quick links
+Phone, WhatsApp, Email
+Social icons
+Copyright
+
+ANIMATION REQUIREMENTS
+
+Use reusable Framer Motion variants:
+
+Fade-in on scroll
+Stagger children
+Slide-up titles
+Hover scale animations
+Infinite sliding hero images
+Testimonial carousel sliding with 1.5s delay
+
+TECHNICAL REQUIREMENTS
+
+Use Next.js <Image />
+Fully responsive mobile-first
+High-performance / Lighthouse-friendly
+Semantic HTML
+All components stored under /components/home/
+Cloudinary image URLs as placeholders
