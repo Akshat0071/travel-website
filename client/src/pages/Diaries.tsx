@@ -49,9 +49,6 @@ export default function Diaries() {
               <p className="text-xl opacity-90 max-w-2xl mx-auto font-light mb-8">
                 Real stories from real travelers. Discover the hidden gems of Himachal through their eyes.
               </p>
-              <Button size="lg" className="bg-white text-primary hover:bg-gray-100 rounded-full px-8">
-                <PenTool className="mr-2" size={18} /> Submit Your Diary
-              </Button>
             </motion.div>
          </div>
       </div>

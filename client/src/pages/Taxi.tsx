@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+// src/pages/Taxi.tsx
+import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Header from "@/components/home/Header";
 import Footer from "@/components/home/Footer";
 import VehicleCard from "@/components/taxi/VehicleCard";
@@ -16,29 +18,118 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+// Local hero images (same as Home/Packages). Update paths if your alias differs.
+import imgMountains from "@assets/generated_images/majestic_snow-capped_himalayan_peaks_at_sunrise.png";
+import imgTemple from "@assets/generated_images/ancient_himachal_temple_with_mountains.png";
+import imgRiver from "@assets/generated_images/crystal_clear_river_in_green_valley.png";
+import imgTrekking from "@assets/generated_images/hikers_on_a_scenic_mountain_trail.png";
+import imgParagliding from "@assets/generated_images/paragliding_over_green_valley.png";
+
 export default function Taxi() {
   const scrollToBooking = () => {
     document.getElementById("booking-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // ---------- Hero carousel configuration ----------
+  // Slides (use the same 5 images as Home/Packages)
+  const slides = [
+    { id: "s1", image: imgMountains, alt: "Majestic Himalayas" },
+    { id: "s2", image: imgTemple, alt: "Ancient Himachal Temple" },
+    { id: "s3", image: imgRiver, alt: "Crystal Clear River Valley" },
+    { id: "s4", image: imgTrekking, alt: "Scenic Mountain Trail" },
+    { id: "s5", image: imgParagliding, alt: "Paragliding Over Valley" },
+  ];
+
+  // Timing: discrete slide -> pause -> slide
+  const moveDuration = 0.6; // seconds to slide between slides
+  const pauseDuration = 1.5; // seconds to pause on each slide
+  const n = slides.length;
+  const totalDuration = n * (moveDuration + pauseDuration);
+
+  // Build keyframes & times using vw so each slide == 100vw
+  const frames: string[] = [];
+  const times: number[] = [];
+  for (let k = 0; k < n; k++) {
+    const pos = `${-k * 100}vw`;
+    frames.push(pos); // arrival
+    frames.push(pos); // hold
+
+    times.push((k * (moveDuration + pauseDuration)) / totalDuration); // arrival time
+    times.push((k * (moveDuration + pauseDuration) + pauseDuration) / totalDuration); // hold time
+  }
+  // final endpoint (move into the duplicated block)
+  const finalPos = `${-n * 100}vw`;
+  frames.push(finalPos);
+  frames.push(finalPos);
+  times.push((n * (moveDuration + pauseDuration)) / totalDuration);
+  times.push((n * (moveDuration + pauseDuration)) / totalDuration);
+
+  // track width for duplicated slides (in vw)
+  const trackWidthVW = 2 * n * 100;
+
+  // Respect reduced motion preference
+  const reduceMotion = useReducedMotion();
+  const shouldAnimate = !reduceMotion;
+
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div className="min-h-screen bg-background font-sans text-slate-900">
       <Header />
 
-      {/* Hero Section */}
-      <div className="relative h-[50vh] min-h-[400px] flex items-center">
+      {/* Hero Section - replaced static image with animated carousel */}
+      <header className="relative h-[50vh] min-h-[400px] flex items-center overflow-hidden" aria-label="Taxi hero">
+        {/* Carousel track (absolute full-bleed) */}
         <div className="absolute inset-0">
-          <img 
-            src="https://res.cloudinary.com/demo/image/upload/v1/taxi1.jpg" 
-            alt="Taxi Service" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/40" />
+          {/* If reduced motion, render first slide statically */}
+          {shouldAnimate ? (
+            <motion.div
+              className="flex h-full"
+              animate={{ x: frames }}
+              transition={{
+                duration: totalDuration,
+                times: times,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              style={{ width: `${trackWidthVW}vw` }}
+              aria-hidden="true"
+            >
+              {[...slides, ...slides].map((slide, idx) => (
+                <div
+                  key={`${slide.id}-${idx}`}
+                  className="relative flex-shrink-0"
+                  style={{ width: "100vw", minWidth: "100vw", height: "100%" }}
+                >
+                  <img
+                    src={String(slide.image)}
+                    alt={slide.alt}
+                    className="w-full h-full object-cover object-center"
+                    style={{ display: "block", width: "100%", height: "100%" }}
+                  />
+                </div>
+              ))}
+            </motion.div>
+          ) : (
+            // reduced-motion fallback: static first image
+            <div className="w-full h-full">
+              <img
+                src={String(slides[0].image)}
+                alt={slides[0].alt}
+                className="w-full h-full object-cover object-center"
+                style={{ display: "block", width: "100%", height: "100%" }}
+              />
+            </div>
+          )}
+
+          {/* Dark gradient overlay to improve readability of foreground */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/40 pointer-events-none" />
         </div>
+
+        {/* Foreground container (content aligned within container) */}
         <div className="container mx-auto px-4 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
             className="text-white"
           >
             <span className="text-accent font-bold uppercase tracking-wider mb-2 block">Premium & Reliable</span>
@@ -56,7 +147,7 @@ export default function Taxi() {
                 <Phone className="mr-2" size={18} /> Call Now
               </Button>
             </div>
-            
+
             <div className="flex gap-6 mt-12 pt-8 border-t border-white/20">
               <div>
                 <p className="text-3xl font-bold text-accent">10+</p>
@@ -73,7 +164,7 @@ export default function Taxi() {
             </div>
           </motion.div>
         </div>
-      </div>
+      </header>
 
       <main>
         {/* Vehicle Types */}
@@ -94,7 +185,7 @@ export default function Taxi() {
         {/* Popular Routes */}
         <section className="py-20 bg-muted/50">
           <div className="container mx-auto px-4">
-             <div className="text-center mb-16">
+            <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">Popular Routes</h2>
               <p className="text-muted-foreground">Fixed price packages for common destinations</p>
             </div>
@@ -131,14 +222,14 @@ export default function Taxi() {
                   </li>
                 </ul>
               </div>
-              
+
               <TaxiBookingForm />
             </div>
           </div>
         </section>
 
         <SafetyFeatures />
-        
+
         <TaxiTestimonials />
 
         {/* FAQ */}
@@ -157,7 +248,6 @@ export default function Taxi() {
             </Accordion>
           </div>
         </section>
-
       </main>
 
       <Footer />

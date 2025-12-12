@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
@@ -17,31 +18,73 @@ const slides = [
 ];
 
 export default function Hero() {
+  // slide timing configuration
+  const moveDuration = 0.6; // seconds it takes to slide to next image
+  const pauseDuration = 1.5; // seconds to pause on each slide
+  const n = slides.length;
+  const totalDuration = n * (moveDuration + pauseDuration);
+
+  // Build keyframes and matching times for discrete slide -> pause -> next slide behavior
+  // We'll animate using vw units so each slide == 100vw
+  const frames: string[] = [];
+  const times: number[] = [];
+
+  for (let k = 0; k < n; k++) {
+    const pos = `${-k * 100}vw`;
+    // arrival (end of move)
+    frames.push(pos);
+    // hold (still)
+    frames.push(pos);
+
+    // normalized times for Framer Motion
+    times.push((k * (moveDuration + pauseDuration)) / totalDuration); // arrival time
+    times.push((k * (moveDuration + pauseDuration) + pauseDuration) / totalDuration); // hold time
+  }
+
+  // final endpoint (after moving past original slides into duplicate block)
+  const finalPos = `${-n * 100}vw`;
+  frames.push(finalPos);
+  frames.push(finalPos);
+  times.push((n * (moveDuration + pauseDuration)) / totalDuration);
+  times.push((n * (moveDuration + pauseDuration)) / totalDuration);
+
+  // track width in vw: number of slides (original + duplicate) * 100vw
+  const trackWidthVW = 2 * n * 100;
+
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Infinite Carousel */}
+      {/* Infinite Carousel Track (original + duplicate) */}
       <div className="absolute inset-0 w-full h-full">
         <motion.div
           className="flex h-full"
-          animate={{
-            x: ["0%", "-100%"],
-          }}
+          // animate using vw keyframes for perfect alignment
+          animate={{ x: frames }}
           transition={{
-            duration: 20, // Adjust speed
+            duration: totalDuration,
+            times: times,
             repeat: Infinity,
             ease: "linear",
           }}
-          style={{ width: `${slides.length * 100}%` }}
+          // explicit track width in vw so each slide = 100vw
+          style={{ width: `${trackWidthVW}vw` }}
         >
-          {/* Duplicate slides for seamless loop */}
+          {/* Render original + duplicate slides in sequence for a seamless loop */}
           {[...slides, ...slides].map((slide, index) => (
-            <div key={`${slide.id}-${index}`} className="relative w-full h-full flex-shrink-0">
+            <div
+              key={`${slide.id}-${index}`}
+              // each slide must take exactly 100vw so it matches viewport width
+              className="relative flex-shrink-0 h-full"
+              style={{ width: "100vw", minWidth: "100vw", height: "100vh" }}
+            >
               <img
                 src={slide.image}
                 alt={slide.alt}
-                className="w-full h-full object-cover"
+                // ensure the image fills the slide fully without distortion
+                className="w-full h-full object-cover object-center"
+                style={{ display: "block", width: "100%", height: "100%" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+              {/* dark gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 pointer-events-none" />
             </div>
           ))}
         </motion.div>
@@ -58,7 +101,7 @@ export default function Hero() {
           >
             Experience the <span className="text-accent italic">Divine</span> Himalayas
           </motion.h1>
-          
+
           <motion.p
             className="text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto font-light"
             initial={{ opacity: 0, y: 30 }}
@@ -83,9 +126,9 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Scroll Indicator */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/70"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
