@@ -21,9 +21,9 @@ export default function Header() {
     { name: "Home", href: "/" },
     { name: "Packages", href: "/packages" },
     { name: "Taxi Service", href: "/taxi" },
-    { name: "Travel Diaries", href: "/#diaries" }, // Anchors on home page need /# if on other pages
-    { name: "Blog", href: "/#blog" },
-    { name: "Contact", href: "/#contact" },
+    { name: "Travel Diaries", href: "/diaries" }, // Anchors on home page need /# if on other pages
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const isHome = location === "/";

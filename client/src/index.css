@@ -51,8 +51,8 @@
 
 :root {
   /* Himalayan Theme Colors */
-  /* Himalayan Blue: Fresh, cold, majestic */
-  --primary: 200 60% 45%; 
+  /* User Requested Green Theme: #38ca95 -> 158 59% 51% */
+  --primary: 158 59% 51%; 
   --primary-foreground: 0 0% 100%;
 
   /* Forest Green: Deep, natural, grounding */
@@ -63,11 +63,12 @@
   --accent: 35 90% 60%;
   --accent-foreground: 0 0% 100%;
 
-  /* Warm Neutrals */
-  --background: 40 20% 98%;
+  /* User Requested Background: #f4f2c9 -> 57 64% 87% */
+  --background: 57 64% 87%;
   --foreground: 200 50% 15%; /* Deep blue-grey for text */
 
-  --card: 0 0% 100%;
+  /* User Requested Card Color: #ffcdcd -> 0 100% 90% */
+  --card: 0 100% 90%;
   --card-foreground: 200 50% 15%;
 
   --popover: 0 0% 100%;
